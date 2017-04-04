@@ -8,7 +8,8 @@ public class UserInfo implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 2319951788162598565L;
-
+	public static final String OBJECT_KEY = "USER"; 
+	
 	private Long id;
 	private String userName;
 	private Integer age;
@@ -53,4 +54,13 @@ public class UserInfo implements Serializable {
 	public String toString() {
 		return "UserInfo [id=" + id + ", userName=" + userName + ", age=" + age + ", password=" + password + "]";
 	}
+	
+	
+    public String getKey() {  
+        return getUserName();  
+    }  
+  
+    public String getObjectKey() {  
+        return OBJECT_KEY;  
+    }
 }

@@ -7,7 +7,11 @@ import org.framestudy.redis.repository.UserInfoRepository;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Repository;
-
+/**
+ * redis操作简单对象
+ * @author Administrator
+ *
+ */
 @Repository
 public class UserInfoRepositoryImpl implements UserInfoRepository {
 
@@ -38,8 +42,6 @@ public class UserInfoRepositoryImpl implements UserInfoRepository {
 		 /*redisTemplate.opsForList(); 
         redisTemplate.opsForSet(); 
         redisTemplate.opsForHash()*/ 
-		
-		
 		redisTemplate.opsForValue().getOperations().delete(userName);
 	}
 
