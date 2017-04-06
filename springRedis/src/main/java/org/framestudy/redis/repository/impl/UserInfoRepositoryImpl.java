@@ -4,7 +4,6 @@ import javax.annotation.Resource;
 
 import org.framestudy.redis.entitys.UserInfo;
 import org.framestudy.redis.repository.UserInfoRepository;
-import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Repository;
 /**
@@ -16,39 +15,49 @@ import org.springframework.stereotype.Repository;
 public class UserInfoRepositoryImpl implements UserInfoRepository {
 
 	@Resource
-    private RedisTemplate<String,UserInfo> redisTemplate;
+    private RedisTemplate<String,UserInfo> redisTemplate;//创建一个关于UserInfo的缓存模板
 	//这里可以放置其他的Session
-	
+
 	@Override
-	public void saveUserInfo(UserInfo user) {
+	public void optObject() {
 		// TODO Auto-generated method stub
-		System.out.println(user);
-		redisTemplate.opsForValue().set(user.getUserName(), user);
-	}
-	
-	
-	@Override
-	public UserInfo getUserInfoByName(String userName) {
-		// TODO Auto-generated method stub
-		System.out.println(userName);
-		return redisTemplate.opsForValue().get(userName);
-	}
-	
-	@CacheEvict(value="default",key="#userName")//清空ID为多少的对象
-	@Override
-	public void deleteUserInfo(String userName) {
-		// TODO Auto-generated method stub
+		UserInfo user = new UserInfo(1L, "小明", 12, "123123");
+		redisTemplate.opsForValue().set(user.getKey(), user);//添加对象
 		
-		 /*redisTemplate.opsForList(); 
-        redisTemplate.opsForSet(); 
-        redisTemplate.opsForHash()*/ 
-		redisTemplate.opsForValue().getOperations().delete(userName);
+		user.setAge(18);
+		redisTemplate.opsForValue().set(user.getKey(), user);//更新对象
+		
+		System.out.println(redisTemplate.opsForValue().get(user.getKey()));//获取对象
+		
+		
+		
+		
 	}
 
 	@Override
-	public void updateUserInfo(UserInfo user) {
+	public void optHashMap() {
 		// TODO Auto-generated method stub
-		redisTemplate.opsForValue().set(user.getUserName(), user);
+		
 	}
+
+	@Override
+	public void optList() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void optSet() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void optSort() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+
 
 }

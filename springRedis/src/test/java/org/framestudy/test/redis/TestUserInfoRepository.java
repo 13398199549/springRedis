@@ -2,7 +2,6 @@ package org.framestudy.test.redis;
 
 import javax.annotation.Resource;
 
-import org.framestudy.redis.entitys.UserInfo;
 import org.framestudy.redis.repository.UserInfoRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,14 +16,8 @@ public class TestUserInfoRepository {
 	private UserInfoRepository userInfoRepositoryImpl;
 	
 	@Test
-	public void testSaveUserInfo(){
-		
-		UserInfo user = new UserInfo(1l,"xiaoming",19,"123456");
-		userInfoRepositoryImpl.saveUserInfo(user);
-		
-		UserInfo user2 = userInfoRepositoryImpl.getUserInfoByName("xiaoming");
-		
-		System.out.println(user2);
+	public void testOptObject(){
+		userInfoRepositoryImpl.optObject();
 	}
 	
 	
